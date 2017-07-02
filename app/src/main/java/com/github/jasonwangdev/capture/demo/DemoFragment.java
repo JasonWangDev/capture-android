@@ -82,11 +82,8 @@ public class DemoFragment extends Fragment implements OnCaptureListener, View.On
         String str = MimeTypeMap.getFileExtensionFromUrl(file.toString());
         if (str.contains("jpg"))
             ((ImageView) getView().findViewById(R.id.iv)).setImageBitmap(BitmapFactory.decodeFile(file.getPath()));
-        else
-        {
-            Bitmap bitmap = ThumbnailUtils.createVideoThumbnail(file.getPath(), MediaStore.Video.Thumbnails.MICRO_KIND);
-            ((ImageView) getView().findViewById(R.id.iv)).setImageBitmap(bitmap);
-        }
+        else if (str.contains("mp4"))
+            ((ImageView) getView().findViewById(R.id.iv)).setImageBitmap(videoCapture.getThumbnail());
     }
 
     @Override

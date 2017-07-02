@@ -3,6 +3,8 @@ package com.github.jasonwangdev.capture;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -55,6 +57,10 @@ public class VideoCapture {
             PermissionUtils.requestPermission(fragment, STORAGE_PERMISSIONS);
         else
             startCapture();
+    }
+
+    public Bitmap getThumbnail() {
+        return file.exists() ? ThumbnailUtils.createVideoThumbnail(file.getPath(), MediaStore.Video.Thumbnails.MICRO_KIND) : null;
     }
 
     public void setOnCaptureListener(OnCaptureListener listener) {
